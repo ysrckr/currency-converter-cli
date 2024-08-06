@@ -5,6 +5,7 @@ go 1.22.5
 require (
 	github.com/charmbracelet/huh v0.5.2
 	github.com/infisical/go-sdk v0.3.3
+	github.com/joho/godotenv v1.5.1
 )
 
 require (
@@ -47,7 +48,6 @@ require (
 	github.com/google/s2a-go v0.1.7 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.5 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
