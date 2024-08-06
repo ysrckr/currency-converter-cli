@@ -25,3 +25,8 @@ go.work.sum
 .env
 
 bin
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
