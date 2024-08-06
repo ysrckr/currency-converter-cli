@@ -13,7 +13,10 @@ func main() {
 
 	Config = config.NewConfig()
 
-	err := huh.Form.Run()
+	currencyForm := huh.NewCurrencyForm()
+	currencyForm.CreateForm()
+
+	err := currencyForm.Form.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
