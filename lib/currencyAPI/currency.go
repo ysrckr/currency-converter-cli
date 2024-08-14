@@ -19,7 +19,7 @@ type Currency struct {
 
 var conf = config.NewConfig("/Users/yasar/github/projects/currency-converter/cli/.env")
 
-func GetCurrencies(base string) Currency {
+func GetCurrency(base, target string) map[string]float64 {
 	api_uri := conf.InfisicalClient.GetSecret("OPEN_EXCHANGE_API_URI", "dev")
 	api_app_id := conf.InfisicalClient.GetSecret("OPEN_EXCHANGE_API_APP_ID", "dev")
 
@@ -47,6 +47,14 @@ func GetCurrencies(base string) Currency {
 		log.Println(err)
 	}
 
-	return currency
+	if target == "" {
+		return currency.Rates
+	}
+
+	result := map[string]float64{
+		target: currency.Rates[target],
+	}
+
+	return result
 
 }

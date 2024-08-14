@@ -18,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	result := currencyapi.GetCurrencies("USD")
+	result := currencyapi.GetCurrency("USD", "TRY")
 
 	fmt.Println(result)
 
