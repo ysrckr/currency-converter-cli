@@ -9,26 +9,26 @@ import (
 
 type Config struct {
 	Envs            map[string]string
-	InfisicalClient infisical.Client
+	InfisicalClient infisical.SecretStore
 }
 
-func NewConfig() *Config {
+func NewConfig(envPath string) *Config {
 	c := &Config{
 		Envs: make(map[string]string),
 	}
-	err := godotenv.Load()
+	err := godotenv.Load(envPath)
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Panic("Error loading .env file")
 	}
 
-	c.Envs, err = godotenv.Read()
+	c.Envs, err = godotenv.Read(envPath)
 	if err != nil {
-		log.Fatal("Error mapping envs")
+		log.Panic("Error mapping envs")
 	}
 
-	InfisicalClient := infisical.NewClient()
+	c.InfisicalClient = infisical.NewInfisicalClient(c.Envs["INFISICAL_PROJECT_ID"])
 
-	InfisicalClient.Login(c.Envs["INFISICAL_CLIENT_ID"], c.Envs["INFISICAL_CLIENT_SECRET"])
+	c.InfisicalClient.Login(c.Envs["INFISICAL_CLIENT_ID"], c.Envs["INFISICAL_CLIENT_SECRET"])
 
 	return c
 }

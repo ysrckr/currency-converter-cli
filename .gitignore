@@ -30,3 +30,4 @@ bin
 .flaskenv*
 !.env.project
 !.env.vault
+**/**/__debug_*
