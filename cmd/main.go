@@ -4,17 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ysrckr/currency-converter-cli/internal/config"
 	"github.com/ysrckr/currency-converter-cli/internal/huh"
+	currencyapi "github.com/ysrckr/currency-converter-cli/lib/currencyAPI"
 )
 
 func main() {
-
-	c := config.NewConfig("/Users/yasar/github/projects/currency-converter/cli/.env")
-
-	secret := c.InfisicalClient.GetSecret("OPEN_EXCHANGE_API_URI", "dev")
-
-	fmt.Println(secret)
 
 	currencyForm := huh.NewCurrencyForm()
 	currencyForm.CreateForm()
@@ -23,5 +17,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	result := currencyapi.GetCurrencies("USD")
+
+	fmt.Println(result)
 
 }
