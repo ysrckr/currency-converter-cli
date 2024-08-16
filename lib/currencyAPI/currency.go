@@ -23,7 +23,7 @@ func GetCurrency(base, target string) map[string]float64 {
 	api_uri := conf.InfisicalClient.GetSecret("OPEN_EXCHANGE_API_URI", "dev")
 	api_app_id := conf.InfisicalClient.GetSecret("OPEN_EXCHANGE_API_APP_ID", "dev")
 
-	api_url, err := url.Parse(fmt.Sprintf("%s/latest.json?app_id=%s&base=%s", api_uri, api_app_id, base))
+	api_url, err := url.Parse(fmt.Sprintf("%s/latest.json?app_id=%s", api_uri, api_app_id))
 	if err != nil {
 		log.Println(err)
 	}
@@ -52,6 +52,7 @@ func GetCurrency(base, target string) map[string]float64 {
 	}
 
 	result := map[string]float64{
+		base:   currency.Rates[base],
 		target: currency.Rates[target],
 	}
 
