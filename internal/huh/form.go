@@ -2,6 +2,8 @@ package huh
 
 import (
 	"errors"
+	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/charmbracelet/huh"
@@ -15,6 +17,7 @@ type CurrencyForm struct {
 	BaseCurrency    string
 	TargetCurrency  string
 	AmountToConvert string
+	Amount          float64
 	Form            *huh.Form
 }
 
@@ -68,4 +71,19 @@ func (cf *CurrencyForm) CreateForm() {
 			}),
 		),
 	)
+}
+
+func (cf *CurrencyForm) SetAmount() {
+	amount, err := strconv.ParseFloat(cf.AmountToConvert, 64)
+	if err != nil {
+		log.Fatalf("parsing error: %v", err)
+	}
+
+	cf.Amount = amount
+}
+
+func (cf *CurrencyForm) Convert(currency map[string]float64) string {
+	result := cf.Amount * currency[cf.TargetCurrency] / currency[cf.BaseCurrency]
+
+	return fmt.Sprintf("Result of conversion is %s %s = %.2f %s", cf.AmountToConvert, cf.BaseCurrency, result, cf.TargetCurrency)
 }
